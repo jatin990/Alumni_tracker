@@ -46,6 +46,26 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'c_admin' => [
+            'driver' => 'session',
+            'provider' => 'c_admins',
+        ],
+
+        'c_admin-api' => [
+            'driver' => 'token',
+            'provider' => 'c_admins',
+            'hash' => false,
+        ],
+        'd_admin' => [
+            'driver' => 'session',
+            'provider' => 'd_admins',
+        ],
+
+        'd_admin-api' => [
+            'driver' => 'token',
+            'provider' => 'd_admins',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +89,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'c_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\C_admin::class,
+        ],
+        'd_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\D_admin::class,
         ],
 
         // 'users' => [
@@ -99,6 +127,20 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'c_admins' => [
+            'provider' => 'c_admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+            'throttle' => 60,
+        ],
+        'd_admins' => [
+            'provider' => 'd_admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+            'throttle' => 60,
+        ],
+
+
     ],
 
     /*
