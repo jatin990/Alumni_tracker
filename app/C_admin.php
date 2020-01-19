@@ -37,4 +37,19 @@ class C_admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function c_admin_profile(){
+        return $this->hasOne(C_adminProfile::class);
+    }
+
+     protected static function boot(){
+        parent::boot();
+        static::created(function( $c_admin){
+            $c_admin->c_admin_profile()->create([
+                'url'=>'kk',
+                'image'=>'/profile/1.png'
+            ]);
+        });
+    }
+
 }

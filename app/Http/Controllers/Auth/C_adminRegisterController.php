@@ -45,6 +45,6 @@ class C_adminRegisterController extends Controller
         ]);
         // $credentials = ['$data->email','$data->password'];
 
-      return redirect()->route('c_admin.dashboard');
+      return redirect()->route('c_admin_profile');
     }
 }

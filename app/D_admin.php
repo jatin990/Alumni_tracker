@@ -38,4 +38,18 @@ class D_admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function d_admin_profile(){
+        return $this->hasOne(D_adminProfile::class);
+    }
+
+     protected static function boot(){
+        parent::boot();
+        static::created(function( $d_admin){
+            $d_admin->d_admin_profile()->create([
+                'url'=>'kk',
+                'image'=>'/profile/1.png'
+            ]);
+        });
+    }
 }

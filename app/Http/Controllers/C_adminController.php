@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
 
 class C_adminController extends Controller
 {
@@ -21,8 +23,8 @@ class C_adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('c_admin.index');
-    }
+    // public function index()
+    // {
+    //     return view('c_admin_profiles.index');
+    // }
 }

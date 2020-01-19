@@ -21,8 +21,8 @@ class D_adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('d_admin.index');
-    }
+    // public function index()
+    // {
+    //     return view('d_admin_profiles.index');
+    // }
 }

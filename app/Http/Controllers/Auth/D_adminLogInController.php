@@ -27,13 +27,13 @@ class D_adminLogInController extends Controller
             'password' => 'required|min:6',
         ]);
             
-        $credentials  = ['email' => $request->email, 'password' => $request->password];
+        $creds  = ['email' => $request->email, 'password' => $request->password];
 
         // Attempt to log the user in
-        if (Auth::guard('d_admin')->attempt($credentials , $request->remember)) {
+        if (Auth::guard('d_admin')->attempt($creds , $request->remember)) {
             // if successful, then redirect to their intended location
 
-            return redirect()->intended(route('d_admin.dashboard'));
+            return redirect()->intended(route('d_admin_profile'));
         }
 
         // if unsuccessful, then redirect back to the login with the form data

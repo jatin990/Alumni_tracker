@@ -31,7 +31,7 @@ class C_adminLogInController extends Controller
         
         // Attempt to log the user in
         if (Auth::guard('c_admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->intended(route('c_admin.dashboard'));
+            return redirect()->intended(route('c_admin_profile'));
         }
 
         // if unsuccessful, then redirect back to the login with the form data

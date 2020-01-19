@@ -17,19 +17,19 @@ class RedirectIfAuthenticated
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
-    {
+    { 
         
         switch ($guard) {
 
         case 'c_admin':
           if (Auth::guard($guard)->check()) {
-            return redirect()->route('c_admin.dashboard');
+            return redirect()->route('c_admin_profile');
           }
           break;
 
           case 'd_admin':
             if (Auth::guard($guard)->check()) {
-            return redirect()->route('d_admin.dashboard');
+            return redirect()->route('d_admin_profile');
           }
           break;
         default:
