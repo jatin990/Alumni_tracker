@@ -46,7 +46,7 @@ class User extends Authenticatable
         static::created(function( $user){
             $user->profile()->create([
                 'url'=>'kk',
-                'image'=>'/storage/profile/1.png'
+                'image'=>'/profile/1.png'
             ]);
         });
     }

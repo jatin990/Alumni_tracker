@@ -11,7 +11,7 @@ class D_adminLogInController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:d_admin')->except('logout');
+      $this->middleware('guest:d_admin', ['except' => ['logout']]);
     }
 
     public function showLoginForm()
@@ -32,6 +32,7 @@ class D_adminLogInController extends Controller
         // Attempt to log the user in
         if (Auth::guard('d_admin')->attempt($credentials , $request->remember)) {
             // if successful, then redirect to their intended location
+
             return redirect()->intended(route('d_admin.dashboard'));
         }
 

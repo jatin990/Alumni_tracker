@@ -12,7 +12,7 @@ class C_adminLogInController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:c_admin')->except('logout');
+      $this->middleware('guest:c_admin', ['except' => ['logout']]);
     }
 
     public function showLoginForm()

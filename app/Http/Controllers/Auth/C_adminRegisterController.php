@@ -33,7 +33,7 @@ class C_adminRegisterController extends Controller
 
         $data = request()->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:c_admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         //* Create a new user instance after a valid registration.
