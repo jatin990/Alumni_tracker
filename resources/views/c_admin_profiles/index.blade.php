@@ -37,9 +37,9 @@ fuckersssssssss
                 USer c_admin_profile fuckaaa
             {{-- </div> --}}
 
-            {{-- @can('update', $c_admin ?? ''->c_admin_profile) --}}
+            @can('update', $c_admin->c_admin_profile)
                 <a href="/c_admin_profile/{{ $c_admin->id }}/edit">Edit Profile</a>
-            {{-- @endcan --}}
+            @endcan
 {{-- 
             <div class="d-flex">
                 <div class="pr-5"><strong>{postCount }}</strong> posts</div>

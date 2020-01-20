@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
 
@@ -28,14 +29,14 @@ class C_admin_ProfilesController extends Controller
 
     public function edit(\App\C_admin $c_admin)
     {
-        // $this->authorize('update', $c_admin->c_admin_profile);
+        $this->authorize('update', $c_admin->c_admin_profile);
 
         return view('c_admin_profiles.edit', compact('c_admin'));
     }
     
      public function update(\App\C_admin $c_admin)
     {
-        // $this->authorize('update', $c_admin->c_admin_profile);
+        $this->authorize('update', $c_admin->c_admin_profile);
 
         $data = request()->validate([
             'url' => 'url',
@@ -51,7 +52,8 @@ class C_admin_ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        Auth::guard('c_admin')->c_admin()->c_admin_profile->update(array_merge(
+        // Auth::guard('c_admin')->c_admin()
+        auth()->user()->c_admin_profile->update(array_merge(
             $data,
             $imageArray ?? []
         ));

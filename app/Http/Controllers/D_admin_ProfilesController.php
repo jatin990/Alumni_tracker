@@ -31,14 +31,14 @@ class D_admin_ProfilesController extends Controller
 
     public function edit(\App\D_admin $d_admin)
     {
-        // $this->authorize('update', $d_admin->d_admin_profile);
+        $this->authorize('update', $d_admin->d_admin_profile);
 
         return view('d_admin_profiles.edit', compact('d_admin'));
     }
     
      public function update(\App\D_admin $d_admin)
     {
-        // $this->authorize('update', $d_admin->d_admin_profile);
+        $this->authorize('update', $d_admin->d_admin_profile);
 
         $data = request()->validate([
             'url' => 'url',
@@ -54,7 +54,8 @@ class D_admin_ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        Auth::guard('d_admin')->d_admin()->d_admin_profile->update(array_merge(
+        // Auth::guard('d_admin')->d_admin()
+        auth()->user()->d_admin_profile->update(array_merge(
             $data,
             $imageArray ?? []
         ));

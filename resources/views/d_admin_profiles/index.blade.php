@@ -35,9 +35,9 @@
                 USer d_admin_profile fuckaaa
             {{-- </div> --}}
 
-            {{-- @can('update', $d_admin ?? ''->d_admin_profile) --}}
+            @can('update', $d_admin->d_admin_profile)
                 <a href="/d_admin_profile/{{ $d_admin->id }}/edit">Edit Profile</a>
-            {{-- @endcan --}}
+            @endcan
 {{-- 
             <div class="d-flex">
                 <div class="pr-5"><strong>{postCount }}</strong> posts</div>

@@ -26,9 +26,9 @@
                 USer profile fuckaaa
             {{-- </div> --}}
 
-            {{-- @can('update', $user ?? ''->profile) --}}
+            @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
-            {{-- @endcan --}}
+            @endcan
 {{-- 
             <div class="d-flex">
                 <div class="pr-5"><strong>{postCount }}</strong> posts</div>
