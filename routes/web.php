@@ -17,37 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-//profile routes for alumni 
-
-
-Route::get('/profile', 'ProfilesController@registered');
-Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
-Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
-Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
-
-//profile routes for college admins 
-
-
-Route::prefix('/c_admin_profile/')->group(function(){
-Route::get('/', 'C_admin_ProfilesController@registered')->name('c_admin_profile');
-Route::get('/{c_admin}', 'C_admin_ProfilesController@index')->name('c_admin_profile.show');
-Route::get('/{c_admin}/edit', 'C_admin_ProfilesController@edit')->name('c_admin_profile.edit');
-Route::patch('/{c_admin}', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
-});
-
-//profile routes for directorate admins 
-
-
-Route::prefix('/d_admin_profile/')->group(function(){
-Route::get('/', 'D_admin_ProfilesController@registered')->name('d_admin_profile');
-Route::get('/{d_admin}', 'D_admin_ProfilesController@index')->name('d_admin_profile.show');
-Route::get('/{d_admin}/edit', 'D_admin_ProfilesController@edit')->name('d_admin_profile.edit');
-Route::patch('/{d_admin}', 'D_admin_ProfilesController@update')->name('d_admin_profile.update');    
-});
-
-
-
 // login and registration routes for college admins and directorate admins
 
 Route::prefix('c_admin')->group(function () {
@@ -67,3 +36,35 @@ Route::prefix('d_admin')->group(function () {
     // Route::get('/', 'D_adminController@index')->name('d_admin.dashboard');
     Route::get('/logout', 'Auth\D_adminLoginController@logout')->name('d_admin.logout');
 });
+
+
+
+//profile routes for alumni 
+Route::get('/profile', 'ProfilesController@registered');
+Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
+Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
+Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
+
+//profile routes for college admins 
+
+
+Route::prefix('/c_admin_profile/')->group(function(){
+    Route::get('/', 'C_admin_ProfilesController@registered')->name('c_admin_profile');
+    Route::get('/{c_admin}', 'C_admin_ProfilesController@index')->name('c_admin_profile.show');
+    Route::get('/{c_admin}/edit', 'C_admin_ProfilesController@edit')->name('c_admin_profile.edit');
+    Route::patch('/{c_admin}', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
+});
+
+//profile routes for directorate admins 
+
+Route::prefix('/d_admin_profile/')->group(function(){
+    Route::get('/', 'D_admin_ProfilesController@registered')->name('d_admin_profile');
+    Route::get('/{d_admin}', 'D_admin_ProfilesController@index')->name('d_admin_profile.show');
+    Route::get('/{d_admin}/edit', 'D_admin_ProfilesController@edit')->name('d_admin_profile.edit');
+    Route::patch('/{d_admin}', 'D_admin_ProfilesController@update')->name('d_admin_profile.update');    
+});
+
+
+
+
+

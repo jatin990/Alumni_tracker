@@ -88,7 +88,7 @@
                 <a href="{{ route('d_admin.login')}}">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
+                    <a href="{{ route('c_admin.register')}}">Blog</a>
                     <a href=" {{ route('c_admin.login')}}">GitHub</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
