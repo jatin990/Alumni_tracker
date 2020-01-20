@@ -16,6 +16,10 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+        // 'guard' => 'c_admin',
+        // 'passwords' => 'c_admins',
+        // 'guard' => 'd_admin',
+        // 'passwords' => 'd_admins',
     ],
 
     /*

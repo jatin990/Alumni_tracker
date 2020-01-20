@@ -31,7 +31,7 @@ Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.upda
 
 Route::prefix('/c_admin_profile/')->group(function(){
 Route::get('/', 'C_admin_ProfilesController@registered')->name('c_admin_profile');
-Route::get('/{c_admin}', 'C_admin_ProfilesController@index')->name('c_admin_profile.show');
+Route::get('/{c_admin}', 'Auth\C_adminLoginController@index')->name('c_admin_profile.show');
 Route::get('/{c_admin}/edit', 'C_admin_ProfilesController@edit')->name('c_admin_profile.edit');
 Route::patch('/{c_admin}', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
 });

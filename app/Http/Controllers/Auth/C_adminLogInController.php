@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\C_admin;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -38,9 +39,16 @@ class C_adminLogInController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
+       public function index(\App\C_admin $c_admin)
+    {
+        return view('c_admin_profiles.index', compact('c_admin'));
+    }
+
     public function logout()
     {
         Auth::guard('c_admin')->logout();
         return redirect('/');
     }
+
+    
 }

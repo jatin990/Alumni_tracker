@@ -14,6 +14,7 @@ class C_admin_ProfilesController extends Controller
     }
 
     public function registered(){
+        
         // $c_admin= Auth::guard('c_admin')->c_admin();
         $c_admin=auth()->user();
 
@@ -21,14 +22,11 @@ class C_admin_ProfilesController extends Controller
         return redirect("/c_admin_profile/{$c_admin->id}");
        }
 
-      public function index(\App\C_admin $c_admin)
-    {
-
-        return view('c_admin_profiles.index', compact('c_admin'));
-    }
+   
 
     public function edit(\App\C_admin $c_admin)
     {
+
         $this->authorize('update', $c_admin->c_admin_profile);
 
         return view('c_admin_profiles.edit', compact('c_admin'));
@@ -36,6 +34,7 @@ class C_admin_ProfilesController extends Controller
     
      public function update(\App\C_admin $c_admin)
     {
+
         $this->authorize('update', $c_admin->c_admin_profile);
 
         $data = request()->validate([

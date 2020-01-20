@@ -53,6 +53,9 @@ class Authenticate extends Middleware
             // }
             //  }
     }
+    public function guard($guard){
+        return Auth::guard('$guard');
+    }
 
 
     
