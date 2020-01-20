@@ -39,10 +39,7 @@ class C_adminLogInController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-       public function index(\App\C_admin $c_admin)
-    {
-        return view('c_admin_profiles.index', compact('c_admin'));
-    }
+      
 
     public function logout()
     {

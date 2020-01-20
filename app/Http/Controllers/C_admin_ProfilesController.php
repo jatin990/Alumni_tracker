@@ -19,8 +19,16 @@ class C_admin_ProfilesController extends Controller
         $c_admin=auth()->user();
 
         // redirect('c_admin_profiles/{$user}');
-        return redirect("/c_admin_profile/{$c_admin->id}");
+        return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin->id]);
        }
+
+        public function index(\App\C_admin $c_admin)
+    { 
+        // $creds=['email' => $c_admin->email, 'password' => $c_admin->password];
+        // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
+
+        return view('c_admin_profiles.index', compact('c_admin'));
+    }
 
    
 

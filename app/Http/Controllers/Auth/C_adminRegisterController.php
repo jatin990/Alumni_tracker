@@ -27,6 +27,7 @@ class C_adminRegisterController extends Controller
     {
         
         return view('auth.C_admin-register');
+        
     }
 
     public function register()
