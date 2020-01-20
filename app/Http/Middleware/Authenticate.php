@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class Authenticate extends Middleware
@@ -17,23 +18,31 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     { 
            $uri=$request->route()->uri;
-          
+
+
+          if((strpos($uri, 'c_admin_profile')) !== false)
+                return route('c_admin.login') ;    
+          elseif((strpos($uri, 'd_admin_profile')) !== false)
+                return route('d_admin.login') ;    
+           else
+           return url('/login') ;         
+
+        
         //   if(str_contains('$uri', 'd_admin')){
         //   dd($uri);
         //  }
-         switch ($uri) {
+      //    switch ($uri) {
 
-        case 'c_admin':
-        return route('c_admin.login') ;         
+      //   case 'c_admin':
         
 
-          case 'd_admin':
-        return route('d_admin.login')  ;        
+      //     case 'd_admin':
+      //   return route('d_admin.login')  ;        
         
-        default:
+      //   default:
 
-        return url('/login')  ;      
-      }
+      //   return url('/login')  ;      
+      // }
         // dd(_>str_contains('d_admin'));
         //         if (! $request->expectsJson()) {
         //     dd($guard);
