@@ -40,6 +40,25 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="college" class="col-md-4 col-form-label text-md-right">{{ __('College') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="college" value="{{ old('college') }}" class="form-control @error('college') is-invalid @enderror" required>
+                                   <option value="college 1">college 1</option>
+                                   <option value="college 2">college 2</option>
+                                   <option value="college 3">college 3</option>
+                                   <option value="college 4">college 4</option>
+                               </select>
+
+                                @error('college')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

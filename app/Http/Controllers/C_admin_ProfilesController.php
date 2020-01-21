@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 use Intervention\Image\Facades\Image;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -26,8 +28,9 @@ class C_admin_ProfilesController extends Controller
     {  
         // $creds=['email' => $c_admin->email, 'password' => $c_admin->password];
         // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
-
-        return view('c_admin_profiles.index', compact('c_admin'));
+        $unverified_alumni=DB::table('profiles')->where('verified',0)->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
+        // dd($unverified_alumni);
+        return view('c_admin_profiles.index', compact('c_admin','unverified_alumni'));
     }
 
    
@@ -36,6 +39,7 @@ class C_admin_ProfilesController extends Controller
     {
 
         $this->authorize('update', $c_admin->c_admin_profile);
+
 
         return view('c_admin_profiles.edit', compact('c_admin'));
     }

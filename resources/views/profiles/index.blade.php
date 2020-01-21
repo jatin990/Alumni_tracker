@@ -9,7 +9,14 @@ fuckersssssssss
                 <div class="panel-body">
                     @if($user->profile->verified !==1)
 the user is not verified
-@elseif($user->profile->verified ===1)
+@auth('c_admin')
+<form action="/verify/{{ $user->id }}" method="post">
+        @csrf
+        @method('PATCH')
+<button class="btn btn-primary">verify</button>
+</form>
+@endauth
+@elseif($user->profile->verified ===1  ||auth()->user() == 'c_admin')
         <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">
         {{-- <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50"> --}}
         {{-- <div class="col-9 pt-5">
@@ -31,6 +38,7 @@ the user is not verified
 
                 USer profile fuckaaa
             {{-- </div> --}}
+
 
             @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>

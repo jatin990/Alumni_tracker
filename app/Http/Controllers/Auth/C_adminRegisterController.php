@@ -37,6 +37,7 @@ class C_adminRegisterController extends Controller
         $data = request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:c_admins'],
+            'college' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         //* Create a new user instance after a valid registration.
@@ -44,6 +45,7 @@ class C_adminRegisterController extends Controller
        $c_admin= C_admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'college' => $data['college'],
             'password' => Hash::make($data['password']),
         ]);
         return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);

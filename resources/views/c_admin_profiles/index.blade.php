@@ -26,7 +26,19 @@ the user is not verified
 
                     {{-- <follow-button c_admin-id="{{ $c_admin ?? ''->id }}" follows="{{ $follows }}"></follow-button> --}}
                 </div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+@forelse ($unverified_alumni as $alumni)
+<div>
+    <a href="{{$c_admin->id}}/verify/{{$alumni->id}}">{{$alumni->name}}</a>
+</div>
+@empty
+    sdfsd
+@endforelse
+    </div>
+    </div>
+</div>
                 {{-- {{-- @can('update', $c_admin ?? ''->c_admin_profile) --}}
                     {{-- <a href="/p/create">Add New Post</a> --}}
                 {{-- @endcan --}} --}}
