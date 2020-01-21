@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
+             <div class="panel-heading">alumni Dashboard</div>
+fuckersssssssss
+                <div class="panel-body">
+                    @if($user->profile->verified !==1)
+the user is not verified
+@elseif($user->profile->verified ===1)
         <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">
         {{-- <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50"> --}}
         {{-- <div class="col-9 pt-5">
@@ -51,4 +57,5 @@
         @endforeach
     </div>
 </div> --}} --}}
+@endif
 @endsection

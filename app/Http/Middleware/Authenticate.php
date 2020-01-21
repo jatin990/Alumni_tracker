@@ -18,7 +18,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     { 
            $uri=$request->route()->uri;
-
+            // dd($request->c_admin);
 
           if((strpos($uri, 'c_admin_profile')) !== false)
                 return route('c_admin.login') ;    

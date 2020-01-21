@@ -63,8 +63,3 @@ Route::prefix('/d_admin_profile/')->group(function(){
     Route::get('/{d_admin}/edit', 'D_admin_ProfilesController@edit')->name('d_admin_profile.edit');
     Route::patch('/{d_admin}', 'D_admin_ProfilesController@update')->name('d_admin_profile.update');    
 });
-
-
-
-
-

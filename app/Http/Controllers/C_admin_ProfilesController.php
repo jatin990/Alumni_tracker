@@ -23,7 +23,7 @@ class C_admin_ProfilesController extends Controller
        }
 
         public function index(\App\C_admin $c_admin)
-    { 
+    {  
         // $creds=['email' => $c_admin->email, 'password' => $c_admin->password];
         // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
 
@@ -41,13 +41,13 @@ class C_admin_ProfilesController extends Controller
     }
     
      public function update(\App\C_admin $c_admin)
-    {
+    { 
 
         $this->authorize('update', $c_admin->c_admin_profile);
 
         $data = request()->validate([
             'url' => 'url',
-            'image' => '',
+            'image' => ['sometimes','image','max:500', 'mimes:jpg'],
         ]);
 
         if (request('image')) {

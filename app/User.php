@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'college', 'year',
     ];
 
     /**
@@ -46,6 +46,7 @@ class User extends Authenticatable
         static::created(function( $user){
             $user->profile()->create([
                 // 'url'=>'kk',
+                'verified'=>0,
                 'image'=>'/profile/1.png'
             ]);
         });

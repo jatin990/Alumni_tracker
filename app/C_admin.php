@@ -47,6 +47,7 @@ class C_admin extends Authenticatable
         static::created(function( $c_admin){
             $c_admin->c_admin_profile()->create([
                 // 'url'=>'kk',
+                'verified'=>0,
                 'image'=>'/profile/1.png'
             ]);
         });

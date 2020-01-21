@@ -19,6 +19,9 @@ class CreateDAdminProfilesTable extends Migration
             $table->string('url')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+
+            $table->index('d_admin_id');
+
         });
     }
 

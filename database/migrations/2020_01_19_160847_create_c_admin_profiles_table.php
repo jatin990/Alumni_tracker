@@ -16,9 +16,12 @@ class CreateCAdminProfilesTable extends Migration
         Schema::create('c_admin_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('c_admin_id');
+            $table->boolean('verified');
             $table->string('url')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+
+            $table->index('c_admin_id');
         });
     }
 

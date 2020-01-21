@@ -11,7 +11,9 @@ fuckersssssssss
                    
                     
 
-
+@if($c_admin->c_admin_profile->verified !==1)
+the user is not verified
+@elseif($c_admin->c_admin_profile->verified ===1)
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
@@ -69,4 +71,5 @@ fuckersssssssss
         </div>
     </div>
 </div>
+@endif
 @endsection

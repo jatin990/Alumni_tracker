@@ -16,6 +16,7 @@ class CreateCAdminsTable extends Migration
         Schema::create('c_admins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('college');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -37,8 +37,8 @@ class ProfilesController extends Controller
         $this->authorize('update', $user->profile);
 
         $data = request()->validate([
-            'url' => 'url',
-            'image' => '',
+            'url' => ['sometimes','url',],
+            'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
         ]);
 
         if (request('image')) {
@@ -49,6 +49,8 @@ class ProfilesController extends Controller
 
             $imageArray = ['image' => $imagePath];
         }
+
+                // auth()->user()->profile->update($data);
 
         auth()->user()->profile->update(array_merge(
             $data,
