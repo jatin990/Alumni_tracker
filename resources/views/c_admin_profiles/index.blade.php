@@ -31,7 +31,7 @@ the user is not verified
         <div class="col-8 offset-2">
 @forelse ($unverified_alumni as $alumni)
 <div>
-    <a href="{{$c_admin->id}}/verify/{{$alumni->id}}">{{$alumni->name}}</a>
+    <a href="{{$c_admin->id}}/view/{{$alumni->id}}">{{$alumni->name}}</a>
 </div>
 @empty
     sdfsd

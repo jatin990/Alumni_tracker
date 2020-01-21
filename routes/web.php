@@ -67,4 +67,5 @@ Route::prefix('/d_admin_profile/')->group(function(){
 
 //verification
 
-Route::get('/c_admin_profile/{c_admin}/verify/{user}','VerificationController@showProfile')->name('profile.to_verify');
+Route::get('/c_admin_profile/{c_admin}/view/{user}','VerificationController@showProfile')->name('profile.to_verify');
+Route::patch('/c_admin_profile/{c_admin}/view/{user}/verify','VerificationController@verifyProfile')->name('profile.verify');

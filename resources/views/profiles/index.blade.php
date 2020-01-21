@@ -10,13 +10,12 @@ fuckersssssssss
                     @if($user->profile->verified !==1)
 the user is not verified
 @auth('c_admin')
-<form action="/verify/{{ $user->id }}" method="post">
+<form action="{{route('profile.verify',['c_admin'=>auth()->user()->id,'user'=>$user->id,])}}" method="post">
         @csrf
         @method('PATCH')
 <button class="btn btn-primary">verify</button>
-</form>
 @endauth
-@elseif($user->profile->verified ===1  ||auth()->user() == 'c_admin')
+@endif
         <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">
         {{-- <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50"> --}}
         {{-- <div class="col-9 pt-5">
@@ -38,11 +37,11 @@ the user is not verified
 
                 USer profile fuckaaa
             {{-- </div> --}}
-
-
+@if(auth()->user()->is_admin !== 1)
             @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
             @endcan
+@endif
 {{-- 
             <div class="d-flex">
                 <div class="pr-5"><strong>{postCount }}</strong> posts</div>
@@ -65,5 +64,5 @@ the user is not verified
         @endforeach
     </div>
 </div> --}} --}}
-@endif
+{{-- @endif --}}
 @endsection

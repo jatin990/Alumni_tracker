@@ -13,10 +13,12 @@ class VerificationController extends Controller
     public function showProfile($c_admin,\App\User $user)
     {
         // dd(auth()->user());
-        return view('profiles.index',compact('user',"c_admin" ));
+        // dd(auth()->user()->is_admin);
+        return view('profiles.index',compact('user' ));
     }
-    public function Verify($user)
+    public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
     {
-        
+       $user->profile->update(['verified'=>1]);
+       return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
     }
 }
