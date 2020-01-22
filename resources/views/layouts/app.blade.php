@@ -49,6 +49,20 @@
                                 </li>
                             @endif
                         @else
+                            @if(auth()->guard('web')->check())
+                                <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}">
+                            <img src="{{  Auth::user()->profile->profileImage() }}" style ='width: 40px;' class="rounded-circle ">
+                                </a>
+                            @elseif(auth()->guard('c_admin')->check())
+                                <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}">
+                            <img src="{{  Auth::user()->c_admin_profile->profileImage() }}" style ='width: 40px;' class="rounded-circle">
+                                </a>
+                            @elseif(auth()->guard('d_admin')->check())
+                                <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}">
+                            <img src="{{  Auth::user()->d_admin_profile->profileImage() }}" style ='width: 40px;' class="rounded-circle">
+                                </a>
+                            @endif
+                        
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

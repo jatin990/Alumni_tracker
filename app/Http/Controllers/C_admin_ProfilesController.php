@@ -35,11 +35,8 @@ class C_admin_ProfilesController extends Controller
         return view('c_admin_profiles.index', compact('c_admin','unverified_alumni'));
     }
 
-   
-
     public function edit(\App\C_admin $c_admin)
     {
-
         $this->authorize('update', $c_admin->c_admin_profile);
 
 

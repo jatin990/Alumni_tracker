@@ -7,8 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">C ADMIN Dashboard</div>
                 <div class="panel-body">
-                   
-                    
 
 @if($c_admin->c_admin_profile->verified !==1)
 <div class="alert alert-danger"><p>the user is not verified</p></div>
@@ -44,6 +42,7 @@
                     </div>
 
                 USer c_admin_profile 
+
 
             @can('update', $c_admin->c_admin_profile)
                 <a href="/c_admin_profile/{{ $c_admin->id }}/edit">Edit Profile</a>

@@ -14,10 +14,12 @@ class VerificationController extends Controller
     {
         // dd(auth()->user());
         // dd(auth()->user()->is_admin);
-
+        
           $this->authorize('update', $c_admin->c_admin_profile);
           // $this->authorize('view', $c_admin->college);
+          if(auth()->user()->college== $user->college)
         return view('profiles.index',compact('user'));
+        else return redirect()->back();
     }
     public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
     {

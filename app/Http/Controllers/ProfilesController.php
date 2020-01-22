@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -21,7 +21,7 @@ class ProfilesController extends Controller
 
       public function index(\App\User $user)
     {
-
+        // dd(auth()->guard('web')->check());
         return view('profiles.index', compact('user'));
     }
 
@@ -68,6 +68,24 @@ class ProfilesController extends Controller
         ));
 
         return redirect("/profile/{$user->id}");
+    }
+
+    public function connect(\App\User $user)
+    {
+        $connections=DB::table('profiles')->where([['college',$user->college],['verified',1]])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
+        // dd($connections);
+        return view('profiles.connections', compact('user','connections'));
+
+    }
+    public function viewother(\App\User $user , \App\User $other_user)
+    {
+       
+        //   $this->authorize('update', $user->user_profile);
+        
+        $user=$other_user;
+          if(auth()->user()->college== $user->college)
+        return view('profiles.index',compact('user'));
+        else return redirect()->back();
     }
 
 }

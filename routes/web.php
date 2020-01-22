@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 Route::fallback(function () {
-    return view('home');
+    return view('lost');
 });
 
 Auth::routes();
@@ -44,10 +44,13 @@ Route::prefix('d_admin')->group(function () {
 
 
 
+
 //profile routes for alumni 
 Route::get('/profile', 'ProfilesController@registered');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
+Route::get('/profile/{user}/connect', 'ProfilesController@connect')->name('profile.connect');
+Route::get('/profile/{user}/connect/{other_user}', 'ProfilesController@viewother')->name('profile.connect.view');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
 
 //profile routes for college admins 

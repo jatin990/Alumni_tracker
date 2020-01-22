@@ -14,6 +14,7 @@
         @csrf
         @method('PATCH')
 <button class="btn btn-primary">verify</button>
+</form>
 @endauth
 @endif
         <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">
@@ -26,9 +27,17 @@
 
                 USer profile
           
-@if(auth()->user()->is_admin !== 1)
+@if(auth()->guard('web')->check())
             @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
             @endcan
 @endif
+<div>
+            @can('update', $user->profile)
+                <a href="{{ $user->id }}/connect">get connected</a>
+            @endcan
+
+</div>
+ 
+
 @endsection

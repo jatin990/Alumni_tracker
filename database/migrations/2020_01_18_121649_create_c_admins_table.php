@@ -19,7 +19,6 @@ class CreateCAdminsTable extends Migration
             $table->string('college');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('is_admin')->default(1);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
