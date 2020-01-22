@@ -21,14 +21,17 @@
         </div>
         <div class="container">
           <div class="row">
-              <div class="col-8 offset-2">
+              <div class="col-12">
                    @can('update', $c_admin->c_admin_profile)
                        @forelse ($unverified_alumni as $alumni)
                        <div>
                            <a href="{{$c_admin->id}}/view/{{$alumni->id}}">{{$alumni->name}}</a>
                        </div>
                        @empty
-                           sdfsd
+                       <div class="alert alert-success">
+                           there are no unverified alumni for your college
+
+                       </div>
                        @endforelse
                        @endcan
                       </div>
