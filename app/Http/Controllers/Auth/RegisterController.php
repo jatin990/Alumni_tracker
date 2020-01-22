@@ -73,5 +73,8 @@ class RegisterController extends Controller
             'year' => $data['year'],
             'password' => Hash::make($data['password']),
         ]);
-    }
+    
+        Auth::guard('web')->logout();
+         Auth::guard('c_admin')->logout();
+}
 }

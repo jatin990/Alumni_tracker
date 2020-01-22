@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Auth;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -16,6 +17,8 @@ class ProfilesController extends Controller
     public function registered(){
         $user= auth()->user();
         // redirect('profiles/{$user}');
+        Auth::guard('c_admin')->logout();
+         Auth::guard('d_admin')->logout();
         return redirect("/profile/{$user->id}");
        }
 
@@ -60,10 +63,11 @@ class ProfilesController extends Controller
         }
 
                 // auth()->user()->profile->update($data);
-
+// $verified=['verified'=>0,];
         auth()->user()->profile->update(array_merge(
             $data,
             $imageArray ?? [],
+            // $verified,
             // $a 
         ));
 

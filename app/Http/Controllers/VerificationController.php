@@ -27,4 +27,17 @@ class VerificationController extends Controller
        $user->profile->update(['verified'=>1]);
        return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
     }
+
+    public function rejectProfile(\App\C_admin $c_admin,\App\User $user)
+    {
+         $this->authorize('update', $c_admin->c_admin_profile);
+          $data = request()->validate([
+            'feedback' => ['sometimes','string','max:255'],
+        ]);
+        // dd($data);
+        $rejected=['rejected'=>1];
+       $user->profile->update(array_merge($data,$rejected));
+       return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
+    }
+
 }

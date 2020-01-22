@@ -26,7 +26,8 @@ class D_adminLogInController extends Controller
             'email'   => 'required|email',
             'password' => 'required|min:6',
         ]);
-            
+            Auth::guard('web')->logout();
+         Auth::guard('c_admin')->logout();
         $creds  = ['email' => $request->email, 'password' => $request->password];
 
         // Attempt to log the user in

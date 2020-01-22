@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include('c_admin_profiles.profileImage')
 @section('content')
 <div class="container">
     <form action="/c_admin_profile/{{ $c_admin->id }}" enctype="multipart/form-data" method="post">

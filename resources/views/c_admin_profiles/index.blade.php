@@ -1,5 +1,7 @@
 @extends('layouts.app')
+@include('c_admin_profiles.profileImage')
 
+ 
 @section('content')
 <div class="container">
     <div class="row">

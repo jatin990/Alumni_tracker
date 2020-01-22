@@ -30,7 +30,7 @@ class C_admin_ProfilesController extends Controller
         // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
         // $unverified_alumni=[];
         // if(auth()->user()->c_admin_profile == $c_admin->c_admin_profile)
-        $unverified_alumni=DB::table('profiles')->where([['verified',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
+        $unverified_alumni=DB::table('profiles')->where([['verified',0],['rejected',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
         // dd($unverified_alumni);
         return view('c_admin_profiles.index', compact('c_admin','unverified_alumni'));
     }

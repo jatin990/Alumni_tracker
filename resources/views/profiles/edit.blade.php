@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include('profiles.profileImage')
 @section('content')
 <div class="container">
     <form action="/profile/{{ $user->id }}" enctype="multipart/form-data" method="post">

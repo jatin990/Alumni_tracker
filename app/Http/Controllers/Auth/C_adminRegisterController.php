@@ -33,30 +33,26 @@ class C_adminRegisterController extends Controller
     public function register()
     {
         // Get a validator for an incoming registration request
-        // dd(request());
         $data = request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:c_admins'],
             'college' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        //* Create a new user instance after a valid registration.
 
+
+        //* Create a new user instance after a valid registration.
        $c_admin= C_admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'college' => $data['college'],
             'password' => Hash::make($data['password']),
         ]);
-        return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
-
-        // $credentials = ['$data->email','$data->password'];
-        // Auth::guard('c_admin')->attempt($credentials, request()->remember); 
-        //     return redirect()->intended(route('c_admin_profile'));
-    }
-
-        // public function login(\App\C_admin $c_admin){
-        // return view('c_admin_profiles.index', compact('c_admin'));
-
-        // }
+            Auth::guard('web')->logout();
+         Auth::guard('d_admin')->logout();
+        //log user in
+        $credentials = ['email' => request()->email, 'password' =>request()->password];
+        Auth::guard('c_admin')->attempt($credentials);
+            return redirect()->intended(route('c_admin_profile'));
+     }
 }

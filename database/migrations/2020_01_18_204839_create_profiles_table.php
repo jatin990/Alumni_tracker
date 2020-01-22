@@ -17,7 +17,9 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->boolean('verified');
+            $table->boolean('rejected');
             $table->string('url')->nullable();
+            $table->text('feedback')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             
