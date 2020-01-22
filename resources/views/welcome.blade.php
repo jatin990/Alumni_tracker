@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Instagram
+                    alumni tracker
                 </div>
 
                 <div class="links">

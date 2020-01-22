@@ -20,9 +20,9 @@ class Authenticate extends Middleware
            $uri=$request->route()->uri;
             // dd($request->c_admin);
 
-          if((strpos($uri, 'c_admin_profile')) !== false)
+          if($this->contains($uri, 'c_admin_profile'))
                 return route('c_admin.login') ;    
-          elseif((strpos($uri, 'd_admin_profile')) !== false)
+          elseif($this->contains($uri, 'd_admin_profile'))
                 return route('d_admin.login') ;    
            else
            return url('/login') ;         
@@ -57,6 +57,15 @@ class Authenticate extends Middleware
         return Auth::guard('$guard');
     }
 
+ public static function contains($haystack, $needles)
+    {
+        foreach ((array) $needles as $needle) {
+            if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
+                return true;
+            }
+        }
 
+        return false;
+    }
     
 }

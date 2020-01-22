@@ -41,8 +41,8 @@ class D_admin_ProfilesController extends Controller
         $this->authorize('update', $d_admin->d_admin_profile);
 
         $data = request()->validate([
-            'url' => 'url',
-            'image' => '',
+            'url' => ['sometimes','url',],
+            'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
         ]);
 
         if (request('image')) {

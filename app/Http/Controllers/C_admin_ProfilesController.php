@@ -28,7 +28,9 @@ class C_admin_ProfilesController extends Controller
     {  
         // $creds=['email' => $c_admin->email, 'password' => $c_admin->password];
         // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
-        $unverified_alumni=DB::table('profiles')->where('verified',0)->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
+        // $unverified_alumni=[];
+        // if(auth()->user()->c_admin_profile == $c_admin->c_admin_profile)
+        $unverified_alumni=DB::table('profiles')->where([['verified',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
         // dd($unverified_alumni);
         return view('c_admin_profiles.index', compact('c_admin','unverified_alumni'));
     }
@@ -50,8 +52,8 @@ class C_admin_ProfilesController extends Controller
         $this->authorize('update', $c_admin->c_admin_profile);
 
         $data = request()->validate([
-            'url' => 'url',
-            'image' => ['sometimes','image','max:500', 'mimes:jpg'],
+            'url' => ['sometimes','url',],
+            'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
         ]);
 
         if (request('image')) {

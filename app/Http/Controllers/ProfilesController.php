@@ -41,6 +41,15 @@ class ProfilesController extends Controller
             'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
         ]);
 
+
+        // if (request('url')) {
+        //     $url=request('url')->validate([
+        //     'url' => ['sometimes','url',],
+        //     ]);
+        //     $a=['url'=>$url];
+        // }
+
+
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');
 
@@ -54,7 +63,8 @@ class ProfilesController extends Controller
 
         auth()->user()->profile->update(array_merge(
             $data,
-            $imageArray ?? []
+            $imageArray ?? [],
+            // $a 
         ));
 
         return redirect("/profile/{$user->id}");

@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::fallback(function () {
+    return view('home');
+});
+
 Auth::routes();
 
 // login and registration routes for college admins and directorate admins

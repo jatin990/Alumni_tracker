@@ -10,14 +10,18 @@ class VerificationController extends Controller
     {
         $this->middleware('auth:c_admin');
     }
-    public function showProfile($c_admin,\App\User $user)
+    public function showProfile(\App\C_admin $c_admin,\App\User $user)
     {
         // dd(auth()->user());
         // dd(auth()->user()->is_admin);
-        return view('profiles.index',compact('user' ));
+
+          $this->authorize('update', $c_admin->c_admin_profile);
+          // $this->authorize('view', $c_admin->college);
+        return view('profiles.index',compact('user'));
     }
     public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
     {
+         $this->authorize('update', $c_admin->c_admin_profile);
        $user->profile->update(['verified'=>1]);
        return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
     }
