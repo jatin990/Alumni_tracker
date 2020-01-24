@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,7 @@ class D_admin_ProfilesController extends Controller
     {
         $this->middleware('auth:d_admin');
     }
-// Auth::guard('d_admin')
-
+    
     public function registered(){
         // $d_admin= Auth::guard('d_admin')->d_admin();
         $d_admin=auth()->user();
@@ -25,8 +25,9 @@ class D_admin_ProfilesController extends Controller
 
       public function index(\App\D_admin $d_admin)
     {
+        $unverified_c_admin=DB::table('c_admin_profiles')->where([['verified',0],['rejected',0],])->orderBy('c_admin_id','desc')->join('c_admins','c_admin_profiles.c_admin_id','=','c_admins.id')->get();
 
-        return view('d_admin_profiles.index', compact('d_admin'));
+        return view('d_admin_profiles.index', compact('d_admin','unverified_c_admin'));
     }
 
     public function edit(\App\D_admin $d_admin)
@@ -42,7 +43,7 @@ class D_admin_ProfilesController extends Controller
 
         $data = request()->validate([
             'url' => ['sometimes','url',],
-            'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
+            'image' => ['sometimes','image','max:1000',],
         ]);
 
         if (request('image')) {

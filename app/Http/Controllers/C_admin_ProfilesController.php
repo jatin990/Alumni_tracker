@@ -50,8 +50,9 @@ class C_admin_ProfilesController extends Controller
 
         $data = request()->validate([
             'url' => ['sometimes','url',],
-            'image' => ['sometimes','image','max:1000', 'mimes:jpg,png,gif,webP'],
+            'image' => ['sometimes','image','max:1500',],
         ]);
+        
 
         if (request('image')) {
             $imagePath = request('image')->store('c_admin_profile', 'public');

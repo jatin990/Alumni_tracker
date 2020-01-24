@@ -46,8 +46,9 @@ class C_admin extends Authenticatable
         parent::boot();
         static::created(function( $c_admin){
             $c_admin->c_admin_profile()->create([
-                // 'url'=>'kk',
+               'url'=>'https://yourlinkedinProfileLink',
                 'verified'=>0,
+                'rejected'=>0,
                 'image'=>'/profile/1.png'
             ]);
         });

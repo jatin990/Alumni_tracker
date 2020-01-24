@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\C_admin;
 use Illuminate\Support\Facades\Auth;
-
+use route;
 
 class C_adminLogInController extends Controller
 {

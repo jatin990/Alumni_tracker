@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include('d_admin_profiles.profileImage')
 
 @section('content')
 <div class="container">

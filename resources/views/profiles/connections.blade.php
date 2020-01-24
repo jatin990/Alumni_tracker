@@ -1,7 +1,5 @@
  @extends('layouts.app')
-@include('profiles.profileImage')
 @section('content')
- 
  <div class="container">
           <div class="row">
               <div class="col-12">

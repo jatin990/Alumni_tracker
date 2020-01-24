@@ -40,6 +40,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -49,10 +50,21 @@
                                 </li>
                             @endif
                         @else
-                           @yield('image')
-                                
-                          
-                        
+                                @auth('web')
+                                    <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}">
+                                     <img src="{{  Auth::user()->profile->profileImage() }}" style ='width: 40px;' class="rounded-circle ">
+                                    </a>
+                                @endauth
+                                @auth('c_admin')
+                                     <a href="{{route('c_admin_profile.show', ['c_admin'=> auth()->user()->id])}}">
+                                       <img src="{{  Auth::user()->c_admin_profile->profileImage() }}" style ='width: 40px;' class="rounded-circle">
+                                    </a>
+                                @endauth
+                                @auth('d_admin')
+                                    <a href="{{route('d_admin_profile.show', ['d_admin'=> auth()->user()->id])}}">
+                                      <img src="{{  Auth::user()->d_admin_profile->profileImage() }}" style ='width: 40px;' class="rounded-circle">
+                                    </a>
+                                @endauth
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

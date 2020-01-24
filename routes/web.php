@@ -22,14 +22,13 @@ Route::fallback(function () {
 
 Auth::routes();
 
-// login and registration routes for college admins and directorate admins
+// login and registration routes for college admins and directorate admins***************************************************************************
 
 Route::prefix('c_admin')->group(function () {
     Route::get('/register', 'Auth\C_adminRegisterController@showregistrationform')->name('c_admin.register');
     Route::post('/register', 'Auth\C_adminRegisterController@register')->name('c_admin.register.submit');
     Route::get('/login', 'Auth\C_adminLoginController@showLoginForm')->name('c_admin.login');
     Route::post('/login', 'Auth\C_adminLoginController@login')->name('c_admin.login.submit');
-    // Route::get('/', 'C_adminController@index')->name('c_admin.dashboard');
     Route::get('/logout', 'Auth\C_adminLoginController@logout')->name('c_admin.logout');
 });
 
@@ -38,14 +37,13 @@ Route::prefix('c_admin')->group(function () {
 Route::prefix('d_admin')->group(function () {
     Route::get('/login', 'Auth\D_adminLoginController@showLoginForm')->name('d_admin.login');
     Route::post('/login', 'Auth\D_adminLoginController@login')->name('d_admin.login.submit');
-    // Route::get('/', 'D_adminController@index')->name('d_admin.dashboard');
     Route::get('/logout', 'Auth\D_adminLoginController@logout')->name('d_admin.logout');
 });
 
 
 
 
-//profile routes for alumni 
+//profile routes for alumni ***************************************************************************
 Route::get('/profile', 'ProfilesController@registered');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
@@ -53,7 +51,7 @@ Route::get('/profile/{user}/connect', 'ProfilesController@connect')->name('profi
 Route::get('/profile/{user}/connect/{other_user}', 'ProfilesController@viewother')->name('profile.connect.view');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
 
-//profile routes for college admins 
+//profile routes for college admins ***************************************************************************
 
 
 Route::prefix('/c_admin_profile/')->group(function(){
@@ -63,7 +61,7 @@ Route::prefix('/c_admin_profile/')->group(function(){
     Route::patch('/{c_admin}', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
 });
 
-//profile routes for directorate admins 
+//profile routes for directorate admins ***************************************************************************
 
 Route::prefix('/d_admin_profile/')->group(function(){
     Route::get('/', 'D_admin_ProfilesController@registered')->name('d_admin_profile');
@@ -73,8 +71,23 @@ Route::prefix('/d_admin_profile/')->group(function(){
 });
 
 
-//verification
+//verification***************************************************************************
 
-Route::get('/c_admin_profile/{c_admin}/view/{user}','VerificationController@showProfile')->name('profile.to_verify');
-Route::patch('/c_admin_profile/{c_admin}/view/{user}/verify','VerificationController@verifyProfile')->name('profile.verify');
-Route::patch('/c_admin_profile/{c_admin}/view/{user}/reject','VerificationController@rejectProfile')->name('profile.reject');
+Route::get('/c_admin_profile/{c_admin}/view/{user}','VerificationController@showProfile')->name('profile.to_verify')->middleware('auth:c_admin');
+Route::patch('/c_admin_profile/{c_admin}/view/{user}/verify','VerificationController@verifyProfile')->name('profile.verify')->middleware('auth:c_admin');
+Route::patch('/c_admin_profile/{c_admin}/view/{user}/reject','VerificationController@rejectProfile')->name('profile.reject')->middleware('auth:c_admin');
+
+Route::get('/d_admin_profile/{d_admin}/view/{c_admin}','VerificationController@showCadminProfile')->name('c_admin_profile.to_verify')->middleware('auth:d_admin');
+Route::patch('/d_admin_profile/{d_admin}/view/{c_admin}/verify','VerificationController@verifyCadminProfile')->name('c_admin_profile.verify')->middleware('auth:d_admin');
+Route::patch('/d_admin_profile/{d_admin}/view/{c_admin}/reject','VerificationController@rejectCadminProfile')->name('c_admin_profile.reject')->middleware('auth:d_admin');
+
+
+
+//eventscontroller***************************************************************************
+Route::get('profile/{user}/events','EventsController@showEvents')->name('events.show')->middleware('auth');//alumni
+
+Route::get('c_admin_profile/{c_admin}/events','EventsController@showCollegeEvents')->name('admin_events.show')->middleware('auth:c_admin');//college admins
+Route::patch('c_admin_profile/{c_admin}/add_new_event','EventsController@addCollegeEvent')->name('events.add')->middleware('auth:c_admin');//college admins
+
+Route::get('d_admin_profile/{d_admin}/events','EventsController@showDirectorateEvents')->name('dir_events.show')->middleware('auth:d_admin');//directorate events
+Route::patch('d_admin_profile/{d_admin}/add_new_event','EventsController@addDirectorateEvent')->name('dir_events.add')->middleware('auth:d_admin');//directorate events
