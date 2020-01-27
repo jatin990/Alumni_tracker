@@ -37,8 +37,11 @@ class D_adminLogInController extends Controller
             return redirect()->intended(route('d_admin_profile'));
         }
 
-        // if unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        // if unsuccessful, then redirect back to the login with the form data and error
+      throw ValidationException::withMessages([
+            'email' => [trans('auth.failed')],
+        ]);
+        return ;
     }
 
     public function logout()

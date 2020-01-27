@@ -19,7 +19,7 @@
                            type="text"
                            class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
                            name="url"
-                           value="{{ old('url') ?? $c_admin->c_admin_profile->url ??''}}"
+                           value="{{ old('url') ?? $c_admin->c_admin_profile->url }}"
                            autocomplete="url" autofocus>
 
                     @if ($errors->has('url'))

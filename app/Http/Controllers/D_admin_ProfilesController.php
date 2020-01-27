@@ -16,10 +16,7 @@ class D_admin_ProfilesController extends Controller
     }
     
     public function registered(){
-        // $d_admin= Auth::guard('d_admin')->d_admin();
         $d_admin=auth()->user();
-        // dd($d_admin);
-        // redirect('d_admin_profiles/{$user}');
         return redirect("/d_admin_profile/{$d_admin->id}");
        }
 
@@ -55,7 +52,6 @@ class D_admin_ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        // Auth::guard('d_admin')->d_admin()
         auth()->user()->d_admin_profile->update(array_merge(
             $data,
             $imageArray ?? []

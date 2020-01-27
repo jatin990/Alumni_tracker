@@ -30,7 +30,7 @@ class ProfilePolicy
      */
     public function view(User $user, Profile $profile)
     {
-        //
+         return $user->profile->verified == 1;
     }
 
     /**

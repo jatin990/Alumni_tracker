@@ -49,7 +49,7 @@ class C_admin extends Authenticatable
                'url'=>'https://yourlinkedinProfileLink',
                 'verified'=>0,
                 'rejected'=>0,
-                'image'=>'/profile/1.png'
+                'image'=>'/profile/1.jpg'
             ]);
         });
     }

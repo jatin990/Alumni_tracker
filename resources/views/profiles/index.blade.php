@@ -4,38 +4,30 @@
         <div class="row">
             <div class="col-8 p-5">
                  <div class="panel-heading">alumni Dashboard</div>
-                   
-                 
-            <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">
-    
-
+                    <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-50">    
                         <div class="font-weight-bold">
                             {{$user->profile->url }}
                             {{$user->college }}
                         </div>
 
                     USer profile
-                @auth('web')
-                @can('update', $user->profile)
-                    <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
-                @endcan
-    
-                   <div>
-                               @can('update', $user->profile)
-                                   <a href="{{ $user->id }}/connect">get connected</a>
-                               @endcan
-               
-                   </div>
-                    <div>
-                               @can('update', $user->profile)
-                                   <a href="{{ $user->id }}/events">events</a>
-                               @endcan
-               
-                   </div>
-                @endauth
+                        @auth('web')
+                           @can('update', $user->profile)
+                               <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>                         
+                          
+                            @can('view',$user->profile)
+                            <div>
+                                <a href="{{ $user->id }}/connect">get connected</a>  
+                            </div>
+                          <div>
+                              <a href="{{ $user->id }}/events">events</a>
+                          </div>
+                            @endcan
+                            @endcan
+                        @endauth
                                 
     <div class="panel-body">
-           @if($user->profile->rejected ===1)
+           @if(($user->profile->rejected ===1 )&& (auth()->user()->profile==$user->profile))
            <div class="alert alert-danger">Your profile was rejected by the admins!! provide or edit some extra info for better recognition</div>
                   <button
                     type="button"

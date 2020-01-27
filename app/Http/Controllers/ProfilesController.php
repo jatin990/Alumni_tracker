@@ -23,7 +23,9 @@ class ProfilesController extends Controller
 
       public function index(\App\User $user)
     {
+        if((auth()->user()->profile->verified==1 )||( auth()->user()->profile==$user->profile))
         return view('profiles.index', compact('user'));
+        else return $this->authorize('view', $user->profile);
     }
 
     public function edit(\App\User $user)
@@ -71,6 +73,7 @@ class ProfilesController extends Controller
 
     public function connect(\App\User $user)
     {
+        $this->authorize('view', $user->profile);
         $this->authorize('update', $user->profile);
 
         $connections=DB::table('profiles')->where([['college',$user->college],['verified',1]])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
@@ -79,6 +82,8 @@ class ProfilesController extends Controller
     }
     public function viewother(\App\User $user , \App\User $other_user)
     {
+        $this->authorize('view', $user->profile);
+        $this->authorize('update', $user->profile);
         $user=$other_user;
           if(auth()->user()->college== $user->college)
         return view('profiles.index',compact('user'));

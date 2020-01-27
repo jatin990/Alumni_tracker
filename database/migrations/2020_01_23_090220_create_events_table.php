@@ -16,10 +16,9 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
+            $table->boolean('level'); // 0 for college and 1 for directorate
             $table->string('college')->nullable();
             $table->string('title');
-            // 0 for college and 1 for directorate
-            $table->boolean('level')->default('0');
             $table->timestamps();
         });
     }

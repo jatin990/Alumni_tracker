@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use App\C_admin;
 use Illuminate\Support\Facades\Auth;
 use route;
@@ -18,11 +19,14 @@ class C_adminLogInController extends Controller
 
     public function showLoginForm()
     {
+// dd(request());
+
         return view('auth.C_admin-login');
     }
 
     public function login(Request $request)
     {
+        // dd($request->remember);
         // Validate the form data
         $this->validate($request, [
             'email'   => 'required|email',
@@ -36,8 +40,12 @@ class C_adminLogInController extends Controller
             return redirect()->intended(route('c_admin_profile'));
         }
         
-        // if unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        // if unsuccessful, then redirect back to the login with the form data and error
+        // return $this->sendFailedLoginResponse($request);
+        throw ValidationException::withMessages([
+            'email' => [trans('auth.failed')],
+        ]);
+        return;
     }
 
       
@@ -47,6 +55,10 @@ class C_adminLogInController extends Controller
         Auth::guard('c_admin')->logout();
         return redirect('/');
     }
-
+    // protected function sendFailedLoginResponse(Request $request)
+    // {
+    //     throw ValidationException::withMessages([trans('auth.failed')]
+    //     );
+    // }
     
 }

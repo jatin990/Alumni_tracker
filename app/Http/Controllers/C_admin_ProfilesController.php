@@ -15,31 +15,29 @@ class C_admin_ProfilesController extends Controller
         $this->middleware('auth:c_admin');
     }
 
-    public function registered(){
-        
-        // $c_admin= Auth::guard('c_admin')->c_admin();
+    public function registered()
+    {
         $c_admin=auth()->user();
-
-        // redirect('c_admin_profiles/{$user}');
         return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin->id]);
-       }
+     }
 
         public function index(\App\C_admin $c_admin)
     {  
-        // $creds=['email' => $c_admin->email, 'password' => $c_admin->password];
-        // Auth::guard('c_admin')->attempt($creds, request()->remember) ;
-        // $unverified_alumni=[];
-        // if(auth()->user()->c_admin_profile == $c_admin->c_admin_profile)
-        $unverified_alumni=DB::table('profiles')->where([['verified',0],['rejected',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->get();
-        // dd($unverified_alumni);
+//if the admin is verified or if he is on his profile,then only he can visit other admins' profile
+        if((auth()->user()->c_admin_profile->verified==1 )||( auth()->user()->c_admin_profile==$c_admin->c_admin_profile)){
+        //*****************returns the unverified unrejected alumni */
+            // $unverified_alumni=DB::table('profiles')->where([['verified',0],['rejected',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->paginate(6);
+            $unverified_alumni=Profile::where([['verified',0],['rejected',0],['college',$c_admin->college],])->orderBy('user_id','desc')->join('users','profiles.user_id','=','users.id')->paginate(6);
         return view('c_admin_profiles.index', compact('c_admin','unverified_alumni'));
-    }
+        }
+        else{
+         return $this->authorize('view',$c_admin->c_admin_profile);
+        }
+        }
 
     public function edit(\App\C_admin $c_admin)
     {
         $this->authorize('update', $c_admin->c_admin_profile);
-
-
         return view('c_admin_profiles.edit', compact('c_admin'));
     }
     
@@ -52,7 +50,8 @@ class C_admin_ProfilesController extends Controller
             'url' => ['sometimes','url',],
             'image' => ['sometimes','image','max:1500',],
         ]);
-        
+        //every time a admin edits his profile, set rejected to 0 so that the directorate can verify him(if unverified) even after rejecting him first
+        $rejected=['rejected'=>0];
 
         if (request('image')) {
             $imagePath = request('image')->store('c_admin_profile', 'public');
@@ -63,10 +62,10 @@ class C_admin_ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        // Auth::guard('c_admin')->c_admin()
         auth()->user()->c_admin_profile->update(array_merge(
             $data,
-            $imageArray ?? []
+            $imageArray ?? [],
+            $rejected,
         ));
 
         return redirect("/c_admin_profile/{$c_admin->id}");

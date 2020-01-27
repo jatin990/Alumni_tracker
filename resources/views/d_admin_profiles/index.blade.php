@@ -37,7 +37,7 @@
                               </div>
 
                     <div class="font-weight-bold">
-                        {{$d_admin->d_admin_profile->url ?? 'yeahhhhhh'}}
+                        {{$d_admin->d_admin_profile->url}}
                     </div>
 
                 USer d_admin_profile 

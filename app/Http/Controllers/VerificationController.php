@@ -10,14 +10,12 @@ class VerificationController extends Controller
   
     public function showProfile(\App\C_admin $c_admin,\App\User $user)
     {
-        // dd(auth()->user());
-        // dd(auth()->user()->is_admin);
-        
-          $this->authorize('update', $c_admin->c_admin_profile);
-          // $this->authorize('view', $c_admin->college);
-          if(auth()->user()->college== $user->college)
+
+          $this->authorize('update', $c_admin->c_admin_profile);// can do only if he is accessing alumni belonging to his profile
+          $this->authorize('view', $c_admin->c_admin_profile);// can do only if he is verified
+          // if(auth()->user()->college== $user->college)
         return view('profiles.index',compact('user'));
-        else return redirect()->back();
+        // else return redirect()->back();
     }
     public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
     {
@@ -29,6 +27,7 @@ class VerificationController extends Controller
     public function rejectProfile(\App\C_admin $c_admin,\App\User $user)
     {
          $this->authorize('update', $c_admin->c_admin_profile);
+         $this->authorize('view', $c_admin->c_admin_profile);
           $data = request()->validate([
             'feedback' => ['sometimes','string','max:255'],
         ]);

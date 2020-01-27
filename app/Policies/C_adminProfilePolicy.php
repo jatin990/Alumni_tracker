@@ -30,7 +30,8 @@ class C_adminProfilePolicy
      */
     public function view(C_admin $c_admin, C_adminProfile $cAdminProfile)
     {
-        //
+         return $c_admin->c_admin_profile->verified == 1;
+
     }
 
     /**

@@ -1,17 +1,24 @@
-@extends('layouts.app')
-
-
-@section('content')
-@auth('c_admin')
+@extends('layouts.app') @section('content') @auth('web')
+@can('view',auth()->user()->profile) @forelse ($events as $event)
+<li>{{$event->title}}</li>
+@if($event->level==1) directorate @endif @if($event->level==0) college @endif
+<li>{{$event->description}}</li>
+@empty there are no relevant events happening @endforelse @endcan @endauth
+@auth('c_admin') @can('view',auth()->user()->c_admin_profile) @forelse ($events as $event)
+<li>{{$event->title}}</li>
+@if($event->level==1) directorate @endif @if($event->level==0) college @endif
+<li>{{$event->description}}</li>
+@empty there are no relevant events happening @endforelse
 <button
     type="button"
     class="btn btn-link btn-sm"
     data-toggle="modal"
     data-target="#Addnewevent"
->Add new event
+>
+    Add new event
 </button>
 <div
-    class="modal fade"
+    class="modal fadein"
     id="Addnewevent"
     tabindex="-1"
     role="form"
@@ -32,31 +39,33 @@
                 </button>
             </div>
             <div class="modal-body">
-               <form action="{{route('events.add',['c_admin' =>auth()->user()->id])}}" method="post">
-                       @csrf
-                       @method('patch')
+                <form
+                    action="{{route('events.add',['c_admin' =>auth()->user()->id])}}"
+                    method="post"
+                >
+                    @csrf @method('patch')
                     <div class="form-group">
-                        <label for="title" class="col-form-label"
-                            > title:</label
+                        <label for="title" class="col-form-label">
+                            title:</label
                         >
                         <input
-                            type='text'
+                            type="text"
                             class="form-control @error('title') is-invalid @enderror"
                             value="{{ old('title') }}"
                             id="title"
                             name="title"
                             placeholder="title"
                             required
-                        >
-                         @error('title')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        />
+                        @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-form-label"
-                            > description:</label
+                        <label for="description" class="col-form-label">
+                            description:</label
                         >
                         <textarea
                             class="form-control @error('description') is-invalid @enderror"
@@ -67,46 +76,50 @@
                             required
                         ></textarea>
                         @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-            
-            <div class="modal-footer">
-                 <div class="form-group row">
+
+                    <div class="modal-footer">
+                        <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('submit') }}
+                                    {{ __("submit") }}
                                 </button>
                             </div>
-                 </div>
-                 <div class="ml-3">
-                     <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                >
-                    Close
-                </button>
-                 </div>
-                    
+                        </div>
+                        <div class="ml-3">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            </form>
-        </div>
         </div>
     </div>
 </div>
-@endauth
+@endcan @endauth
 
 {{-- for directorate --}}
-@auth('d_admin')
+@auth('d_admin') @forelse ($events as $event)
+<li>{{$event->title}}</li>
+
+<li>{{$event->description}}</li>
+@empty there are no relevant events happening @endforelse
 <button
     type="button"
     class="btn btn-link btn-sm"
     data-toggle="modal"
     data-target="#AddnewDevent"
->Add new event
+>
+    Add new event
 </button>
 <div
     class="modal fade"
@@ -130,31 +143,33 @@
                 </button>
             </div>
             <div class="modal-body">
-               <form action="{{route('dir_events.add',['d_admin' =>auth()->user()->id])}}" method="post">
-                       @csrf
-                       @method('patch')
+                <form
+                    action="{{route('dir_events.add',['d_admin' =>auth()->user()->id])}}"
+                    method="post"
+                >
+                    @csrf @method('patch')
                     <div class="form-group">
-                        <label for="title" class="col-form-label"
-                            > title:</label
+                        <label for="title" class="col-form-label">
+                            title:</label
                         >
                         <input
-                            type='text'
+                            type="text"
                             class="form-control @error('title') is-invalid @enderror"
                             value="{{ old('title') }}"
                             id="title"
                             name="title"
                             placeholder="title"
                             required
-                        >
-                         @error('title')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        />
+                        @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-form-label"
-                            > description:</label
+                        <label for="description" class="col-form-label">
+                            description:</label
                         >
                         <textarea
                             class="form-control @error('description') is-invalid @enderror"
@@ -165,41 +180,33 @@
                             required
                         ></textarea>
                         @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-            
-            <div class="modal-footer">
-                 <div class="form-group row">
+
+                    <div class="modal-footer">
+                        <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('submit') }}
+                                    {{ __("submit") }}
                                 </button>
                             </div>
-                 </div>
-                 <div class="ml-3">
-                     <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                >
-                    Close
-                </button>
-                 </div>
-                    
+                        </div>
+                        <div class="ml-3">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            </form>
-        </div>
         </div>
     </div>
 </div>
-@endauth
-@forelse ($events as $event)
-    <li>{{$event->title}}</li>
-    <li>{{$event->description}}</li>
-@empty
-    there are no relevant events happening 
-@endforelse
-@endsection
+@endauth @endsection

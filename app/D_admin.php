@@ -48,7 +48,7 @@ class D_admin extends Authenticatable
         static::created(function( $d_admin){
             $d_admin->d_admin_profile()->create([
                 // 'url'=>'kk',
-                'image'=>'/profile/1.png'
+                'image'=>'/profile/1.jpg'
             ]);
         });
     }
