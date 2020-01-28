@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -37,18 +36,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-    protected static function boot(){
+    protected static function boot()
+    {
         parent::boot();
-        static::created(function( $user){
+        static::created(function ($user) {
             $user->profile()->create([
-                'url'=>'https://yourlinkedinProfileLink',
-                'verified'=>0,
-                'rejected'=>0,
-                'image'=>'/profile/1.jpg'
+                // 'url'=>'https://yourlinkedinProfileLink',
+                'verified' => 0,
+                'rejected' => 0,
+                'image' => '/profile/1.jpg',
             ]);
         });
     }

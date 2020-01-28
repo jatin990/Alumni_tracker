@@ -15,17 +15,14 @@
                 <div class="form-group row">
                     <label for="url" class="col-md-4 col-form-label">URL</label>
 
-                    <input id="url"
-                           type="text"
-                           class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
-                           name="url"
-                           value="{{ old('url') ?? $d_admin->d_admin_profile->url}}"
-                           autocomplete="url" autofocus>
+                    <input id="url" type="text" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
+                        name="url" value="{{ old('url') ?? $d_admin->d_admin_profile->url}}" autocomplete="url"
+                        autofocus>
 
                     @if ($errors->has('url'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('url') }}</strong>
-                        </span>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('url') }}</strong>
+                    </span>
                     @endif
                 </div>
 
@@ -35,7 +32,7 @@
                     <input type="file" class="form-control-file" id="image" name="image">
 
                     @if ($errors->has('image'))
-                        <strong>{{ $errors->first('image') }}</strong>
+                    <strong>{{ $errors->first('image') }}</strong>
                     @endif
                 </div>
 

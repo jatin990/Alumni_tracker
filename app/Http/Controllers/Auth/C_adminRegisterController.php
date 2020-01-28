@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\C_admin;
+use App\Http\Controllers\Controller;
 use Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class C_adminRegisterController extends Controller
 {
-
 
     public function __construct()
     {
@@ -25,9 +23,9 @@ class C_adminRegisterController extends Controller
 
     public function showregistrationform()
     {
-        
+
         return view('auth.C_admin-register');
-        
+
     }
 
     public function register()
@@ -40,19 +38,18 @@ class C_adminRegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-
         //* Create a new user instance after a valid registration.
-       $c_admin= C_admin::create([
+        $c_admin = C_admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'college' => $data['college'],
             'password' => Hash::make($data['password']),
         ]);
-            Auth::guard('web')->logout();
-         Auth::guard('d_admin')->logout();
+        Auth::guard('web')->logout();
+        Auth::guard('d_admin')->logout();
         //log user in
-        $credentials = ['email' => request()->email, 'password' =>request()->password];
+        $credentials = ['email' => request()->email, 'password' => request()->password];
         Auth::guard('c_admin')->attempt($credentials);
-            return redirect()->intended(route('c_admin_profile'));
-     }
+        return redirect()->intended(route('c_admin_profile'));
+    }
 }

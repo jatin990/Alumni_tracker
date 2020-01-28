@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use DB;
 use App\Event;
-
-
+use DB;
+use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    
+
     public function showEvents(\App\User $user)
     {
-        $this->authorize('view', $user->profile);//if user is verified,then only
-        $this->authorize('update', $user->profile);//if user is on his profile,then only
+        $this->authorize('view', $user->profile); //if user is verified,then only
+        $this->authorize('update', $user->profile); //if user is on his profile,then only
 
         // $dir=DB::table('events')->where('college',NULL);
-       $events=DB::table('events')->where('college',$user->college)->orWhere('college',NULL)->orderBy('created_at','desc')->get();
-        return view('events',compact('events'));
+        $events = DB::table('events')->where('college', $user->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(10);
+        return view('events', compact('events'));
 
     }
-    // college event management 
+    // college event management
     public function showCollegeEvents(\App\C_Admin $c_admin)
     {
-        $this->authorize('view', $c_admin->c_admin_profile);//same as above
+        $this->authorize('view', $c_admin->c_admin_profile); //same as above
         $this->authorize('update', $c_admin->c_admin_profile);
 
-       $events=DB::table('events')->where('college',$c_admin->college)->orWhere('college',NULL)->orderBy('created_at','desc')->get();
-    //    dd($events);
-       
-       return view('events',compact('events'));
+        $events = DB::table('events')->where('college', $c_admin->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(10);
+        //    dd($events);
+
+        return view('events', compact('events'));
 
     }
     public function addCollegeEvent(\App\C_admin $c_admin)
@@ -40,44 +38,41 @@ class EventsController extends Controller
 
         $data = request()->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string',],
+            'description' => ['required', 'string'],
         ]);
 
-       
         //* Create a new event instance after a valid registration.
-       $events= Event::create([
+        $events = Event::create([
             'title' => $data['title'],
             'level' => 0,
             'college' => auth()->user()->college,
             'description' => $data['description'],
-       ]);
-       //redirect them to their profile
-        return redirect()->route('admin_events.show',['c_admin'=>$c_admin]);
+        ]);
+        //redirect them to their profile
+        return redirect()->route('admin_events.show', ['c_admin' => $c_admin]);
     }
-
 
 // *************************Directorate event management
 
-     public function showDirectorateEvents(\App\D_Admin $d_admin)
+    public function showDirectorateEvents(\App\D_Admin $d_admin)
     {
-       $events=DB::table('events')->orderBy('created_at','desc')->get();
-       return view('events',compact('events'));
+        $events = DB::table('events')->orderBy('created_at', 'desc')->get();
+        return view('events', compact('events'));
 
     }
     public function addDirectorateEvent(\App\D_admin $d_admin)
     {
         $data = request()->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string',],
+            'description' => ['required', 'string'],
         ]);
 
-
         //* Create a new event instance after a valid registration.
-       $events= Event::create([
+        $events = Event::create([
             'title' => $data['title'],
             'level' => 1,
             'description' => $data['description'],
         ]);
-        return redirect()->route('dir_events.show',['d_admin'=>$d_admin]);
+        return redirect()->route('dir_events.show', ['d_admin' => $d_admin]);
     }
 }

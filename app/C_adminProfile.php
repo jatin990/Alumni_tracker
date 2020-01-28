@@ -14,8 +14,7 @@ class C_adminProfile extends Model
     }
      public function profileImage()
     {
-        $imagePath = ($this->image) ? $this->image : 'c_admin_profile/5nxZgeK0tDXGE9rVaJa8MeZsvgHuvfKXpMdWrSMY.png';
-
+        $imagePath = ($this->image) ? $this->image : 'c_admin_profile/1.jpgv    ';
         return '/storage/' . $imagePath;
     }
 }
