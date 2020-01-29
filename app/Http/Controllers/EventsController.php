@@ -15,7 +15,7 @@ class EventsController extends Controller
         $this->authorize('update', $user->profile); //if user is on his profile,then only
 
         // $dir=DB::table('events')->where('college',NULL);
-        $events = DB::table('events')->where('college', $user->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(10);
+        $events = DB::table('events')->where('college', $user->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(20);
         return view('events', compact('events'));
 
     }
@@ -25,7 +25,7 @@ class EventsController extends Controller
         $this->authorize('view', $c_admin->c_admin_profile); //same as above
         $this->authorize('update', $c_admin->c_admin_profile);
 
-        $events = DB::table('events')->where('college', $c_admin->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(10);
+        $events = DB::table('events')->where('college', $c_admin->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(20);
         //    dd($events);
 
         return view('events', compact('events'));

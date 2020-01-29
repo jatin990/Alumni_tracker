@@ -1,3 +1,5 @@
-.black {
-    color: red;
+blockquote {
+    &:hover {
+        box-shadow: none !important;
+    }
 }
