@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/d_admin_profile/{{ $d_admin->id }}" enctype="multipart/form-data" method="post">
+    <form action="/d_admin_profile/{{ $d_admin->id }}/update" enctype="multipart/form-data" method="post">
         @csrf
         @method('PATCH')
 

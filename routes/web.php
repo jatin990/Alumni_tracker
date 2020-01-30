@@ -44,21 +44,21 @@ Route::prefix('d_admin')->group(function () {
 
 
 //profile routes for alumni ***************************************************************************
+
 Route::get('/profile', 'ProfilesController@registered');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 Route::get('/profile/{user}/connect', 'ProfilesController@connect')->name('profile.connect');
 Route::get('/profile/{user}/connect/{other_user}', 'ProfilesController@viewother')->name('profile.connect.view');
-Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
+Route::patch('/profile/{user}/update', 'ProfilesController@update')->name('profile.update');
 
 //profile routes for college admins ***************************************************************************
-
 
 Route::prefix('/c_admin_profile/')->group(function(){
     Route::get('/', 'C_admin_ProfilesController@registered')->name('c_admin_profile');
     Route::get('/{c_admin}', 'C_admin_ProfilesController@index')->name('c_admin_profile.show');
     Route::get('/{c_admin}/edit', 'C_admin_ProfilesController@edit')->name('c_admin_profile.edit');
-    Route::patch('/{c_admin}', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
+    Route::patch('/{c_admin}/update', 'C_admin_ProfilesController@update')->name('c_admin_profile.update');    
 });
 
 //profile routes for directorate admins ***************************************************************************
@@ -67,7 +67,7 @@ Route::prefix('/d_admin_profile/')->group(function(){
     Route::get('/', 'D_admin_ProfilesController@registered')->name('d_admin_profile');
     Route::get('/{d_admin}', 'D_admin_ProfilesController@index')->name('d_admin_profile.show');
     Route::get('/{d_admin}/edit', 'D_admin_ProfilesController@edit')->name('d_admin_profile.edit');
-    Route::patch('/{d_admin}', 'D_admin_ProfilesController@update')->name('d_admin_profile.update');    
+    Route::patch('/{d_admin}/update', 'D_admin_ProfilesController@update')->name('d_admin_profile.update');    
 });
 
 
@@ -84,6 +84,7 @@ Route::patch('/d_admin_profile/{d_admin}/view/{c_admin}/reject','VerificationCon
 
 
 //eventscontroller***************************************************************************
+
 Route::get('profile/{user}/events','EventsController@showEvents')->name('events.show')->middleware('auth');//alumni
 
 Route::get('c_admin_profile/{c_admin}/events','EventsController@showCollegeEvents')->name('admin_events.show')->middleware('auth:c_admin');//college admins
