@@ -9,8 +9,8 @@ $factory->define(Event::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
-        'level' => 0,
-        'college' => 'college 1',
+        'level' => 1,
+        // 'college' => 'college 1',
 
     ];
 });

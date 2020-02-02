@@ -46,7 +46,7 @@ class User extends Authenticatable
         parent::boot();
         static::created(function ($user) {
             $user->profile()->create([
-                // 'url'=>'https://yourlinkedinProfileLink',
+                'url'=>'https://yourlinkedinProfileLink',
                 'verified' => 0,
                 'rejected' => 0,
                 'image' => '/profile/1.jpg',
