@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -21,7 +23,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -53,10 +55,14 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'college' => ['required', 'string'],
+            'college' => ['required', 'string', 'max:255'],
+            'branch' => ['required', 'string', 'max:255'],
+            'phone_no' => ['required', 'digits:10'],
+            'dateOfBirth' => ['required'],
             'year' => ['required', 'numeric', 'between:2011,2019'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
     }
 
     /**
@@ -67,16 +73,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Mail::to($data['email'])->send(new WelcomeMail());
         Auth::guard('web')->logout();
         Auth::guard('c_admin')->logout();
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'college' => $data['college'],
+            'branch' => $data['branch'],
+            'dateOfBirth' => $data['dateOfBirth'],
+            'phone_no' => $data['phone_no'],
             'year' => $data['year'],
             'password' => Hash::make($data['password']),
         ]);
-    
-        
-}
+
+    }
 }

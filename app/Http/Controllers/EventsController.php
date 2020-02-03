@@ -16,7 +16,7 @@ class EventsController extends Controller
 
         // $dir=DB::table('events')->where('college',NULL);
         $events = DB::table('events')->where('college', $user->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(20);
-        return view('events', compact('events'));
+        return view('events', compact('events','user'));
 
     }
     // college event management
@@ -28,7 +28,7 @@ class EventsController extends Controller
         $events = DB::table('events')->where('college', $c_admin->college)->orWhere('college', null)->orderBy('created_at', 'desc')->paginate(20);
         //    dd($events);
 
-        return view('events', compact('events'));
+        return view('events', compact('events','c_admin'));
 
     }
     public function addCollegeEvent(\App\C_admin $c_admin)
@@ -56,8 +56,8 @@ class EventsController extends Controller
 
     public function showDirectorateEvents(\App\D_Admin $d_admin)
     {
-        $events = DB::table('events')->orderBy('created_at', 'desc')->get();
-        return view('events', compact('events'));
+        $events = DB::table('events')->orderBy('created_at', 'desc')->paginate(10);
+        return view('events', compact('events','d_admin'));
 
     }
     public function addDirectorateEvent(\App\D_admin $d_admin)

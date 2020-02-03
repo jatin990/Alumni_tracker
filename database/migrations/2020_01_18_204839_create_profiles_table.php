@@ -19,6 +19,9 @@ class CreateProfilesTable extends Migration
             $table->boolean('verified');
             $table->boolean('rejected');
             $table->string('url')->nullable();
+            $table->string('status')->nullable();
+            $table->string('location')->nullable();
+            $table->string('job')->nullable();
             $table->text('feedback')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

@@ -2,6 +2,9 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
+        <div class="h1 offset-2">Events</div>
+    </div>
+    <div class="row">
         <div class='col-12 offset-2'>
             {{$events->links()}}
         </div>
@@ -15,7 +18,7 @@
                 @endauth
                 @forelse ($events as $event)
                 <blockquote
-                    class="list-group-item list-group-flush font-weight-bold text-left shadow border-bottom-0 m-0 btn"
+                    class="list-group-item h3 list-group-flush font-weight-bold text-left shadow p-4 mb-1 border-bottom-0 m-0 btn"
                     data-toggle="modal" data-target="#event_{{$event->id}}">
                     {{$event->title}}
                     <footer class="blockquote-footer text-right">
@@ -139,13 +142,6 @@
 
         {{-- for directorate --}}
         @auth('d_admin')
-        @forelse ($events as $event)
-        <li>{{$event->title}}</li>
-
-        <li>{{$event->description}}</li>
-        @empty
-        there are no relevant events happening
-        @endforelse
         <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#AddnewDevent">
             Add new event
         </button>

@@ -24,10 +24,12 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light shadow-sm">
+        <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+
+                    <img src="/storage/images/logo-white.png" alt="Alumn">
+
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -43,6 +45,51 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if(\Request::is('login/*') || (Request::is('profile/*')))
+                        @auth('web')
+                        @can('view',$user->profile)
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('events.show',['user'=>auth()->user()->id])}}">Event</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('notices.show',['user'=>auth()->user()->id])}}">Notices</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#">Group Chat</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                href='{{route('profile.connect',['user'=>auth()->user()->id])}}'>Connections</a>
+                        </li>
+                        @endcan
+                        @endauth
+                        @endif
+
+
+                        @if(\Request::is('c_admin/*')|| (Request::is('c_admin_profile/*')))
+                        @auth('c_admin')
+                        @can('view',$c_admin->c_admin_profile)
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('admin_events.show', ['c_admin'=>auth()->user()->id])}}">Event</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('admin_notices.show', ['c_admin'=>auth()->user()->id])}}">Notices</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#requests">Alumni requests</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Group Chat</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Alumni</a></li>
+                        @endcan
+                        @endauth
+                        @endif
+
+                        @if(\Request::is('d_admin/*')|| (Request::is('d_admin_profile/*')))
+                        @auth('d_admin')
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('dir_events.show', ['d_admin'=>auth()->user()->id])}}">Event</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('dir_notices.show', ['d_admin'=>auth()->user()->id])}}">Notices</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#requests">College staff requests</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="#">College admins</a></li>
+                        @endauth
+                        @endif
+
                         @guest
 
                         <li class="nav-item">
@@ -60,12 +107,14 @@
                                 class="rounded-circle ">
                         </a>
                         @endauth
+
                         @auth('c_admin')
                         <a href="{{route('c_admin_profile.show', ['c_admin'=> auth()->user()->id])}}">
                             <img src="{{  Auth::user()->c_admin_profile->profileImage() }}" style='width: 40px;'
                                 class="rounded-circle">
                         </a>
                         @endauth
+
                         @auth('d_admin')
                         <a href="{{route('d_admin_profile.show', ['d_admin'=> auth()->user()->id])}}">
                             <img src="{{  Auth::user()->d_admin_profile->profileImage() }}" style='width: 40px;'

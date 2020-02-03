@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'college', 'year',
+        'name', 'email', 'password', 'college', 'year', 'branch', 'phone_no', 'dateOfBirth',
     ];
 
     /**
@@ -46,7 +46,6 @@ class User extends Authenticatable
         parent::boot();
         static::created(function ($user) {
             $user->profile()->create([
-                'url'=>'https://yourlinkedinProfileLink',
                 'verified' => 0,
                 'rejected' => 0,
                 'image' => '/profile/1.jpg',

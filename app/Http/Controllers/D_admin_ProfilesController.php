@@ -21,8 +21,8 @@ class D_admin_ProfilesController extends Controller
 
     public function index(\App\D_admin $d_admin)
     {
-        $unverified_c_admin = \App\C_adminProfile::where([['verified', 0], ['rejected', 0]])->orderBy('c_admin_id', 'desc')->join('c_admins', 'c_admin_profiles.c_admin_id', '=', 'c_admins.id')->get();
-
+        $unverified_c_admin = \App\C_adminProfile::where([['verified', 0], ['rejected', 0]])->orderBy('c_admin_id', 'desc')->join('c_admins', 'c_admin_profiles.c_admin_id', '=', 'c_admins.id')->paginate(5);
+// dd($unverified_c_admin);
         return view('d_admin_profiles.index', compact('d_admin', 'unverified_c_admin'));
     }
 

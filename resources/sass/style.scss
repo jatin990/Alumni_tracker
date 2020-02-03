@@ -1,0 +1,28 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+blockquote {
+    &:hover {
+        box-shadow: none !important;
+    }
+}
+
+
+
+#intro {
+    padding: 0;
+    width: 100%;
+    // background: #333;
+
+    .border {
+        border: 20px solid powderblue !important;
+        padding: 30px;
+        margin-right: 2em;
+        margin-top: 4.4em;
+        margin-left: 1em;
+    }
+
+
+}

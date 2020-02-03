@@ -42,6 +42,9 @@ class ProfilesController extends Controller
 
         $data = request()->validate([
             'url' => ['sometimes', 'nullable', 'url'],
+            'location' => ['sometimes', 'nullable', 'string','max:255'],
+            'job' => ['sometimes', 'nullable', 'string','max:255'],
+            'status' => ['sometimes', 'nullable', 'string','max:255'],
             'image' => ['sometimes', 'image', 'max:1500'],
         ]);
 

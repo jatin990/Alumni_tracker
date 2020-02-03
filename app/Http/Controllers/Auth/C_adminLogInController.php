@@ -19,7 +19,7 @@ class C_adminLogInController extends Controller
 
     public function showLoginForm()
     {
-// dd(request());
+// dd(request::is('c_admin/*'));
 
         return view('auth.C_admin-login');
     }

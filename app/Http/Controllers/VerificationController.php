@@ -14,7 +14,7 @@ class VerificationController extends Controller
           $this->authorize('update', $c_admin->c_admin_profile);// can do only if he is accessing alumni belonging to his profile
           $this->authorize('view', $c_admin->c_admin_profile);// can do only if he is verified
           // if(auth()->user()->college== $user->college)
-        return view('profiles.index',compact('user'));
+        return view('profiles.index',compact('user','c_admin'));
         // else return redirect()->back();
     }
     public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
@@ -43,7 +43,7 @@ class VerificationController extends Controller
         
           // $this->authorize('update', $d_admin->d_admin_profile);
           
-        return view('c_admin_profiles.index',compact('c_admin'));
+        return view('c_admin_profiles.index',compact('c_admin','d_admin'));
     }
     public function verifycAdminProfile(\App\D_admin $d_admin,\App\C_admin $c_admin)
     {

@@ -15,7 +15,6 @@
         # General
         --------------------------------------------------------------*/
 
-
         h1,
         h2,
         h3,
@@ -314,17 +313,16 @@
 
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-md sticky-top navbar-light  bg-light  shadow-sm">
+    <nav class="navbar navbar-expand-md sticky-top navbar-dark  bg-dark  shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Alumn') }}
+                <img src="/storage/images/alumn.png" alt="Alumni">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar"
                 aria-controls="myNavbar" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -338,7 +336,8 @@
                     <li class="nav-item"><a class="nav-link" href="#about">AIM</a></li>
                     @if (Route::has('login'))
                     @auth
-                    <li class="nav-item"> <a class="nav-link" href="/profile/{{ auth()->user()->id }}">Your Profile</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/profile/{{ auth()->user()->id }}">Your Profile</a>
+                    </li>
                     @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -350,12 +349,13 @@
                     @endif
                 </ul>
             </div>
+        </div>
 
     </nav>
     <section id="hero">
         <div class="hero-container">
             <h1 class="line anim-typewriter">Welcome to Alumn</h1>
-            <h2>Your connections to all the things around you literally define who you are.”</h2>
+            <h2>Your connections to all the things around you literally define who you are.</h2>
             <!-- <a href="#register" class="btn-get-started">Register Now</a> -->
         </div>
     </section>

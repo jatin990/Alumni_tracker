@@ -35,6 +35,7 @@ class C_adminRegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:c_admins'],
             'college' => ['required', 'string'],
+            // 'phone_no' => ['required', 'numeric','digits:10' ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -43,6 +44,7 @@ class C_adminRegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'college' => $data['college'],
+            // 'phone_no' => $data['phone_no'],
             'password' => Hash::make($data['password']),
         ]);
         Auth::guard('web')->logout();

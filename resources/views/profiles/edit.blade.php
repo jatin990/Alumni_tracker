@@ -6,36 +6,80 @@
         @method('PATCH')
 
         <div class="row">
-            <div class="col-8 offset-2">
-
+            <div class="col-8">
                 <div class="row">
                     <h1>Edit Profile</h1>
                 </div>
+                <div class="form-group row mt-4">
+                    <label for="location"
+                        class="col-md-4 col-form-label text-md-right">{{ __('Current location') }}</label>
+                    <div class="col-md-6">
+                        <input id="location" type="text" class="form-control @error('location') is-invalid @enderror"
+                            name="location" value="{{ old('location') }}" autocomplete="location">
 
-                <div class="form-group row">
-                    <label for="url" class="col-md-4 col-form-label">URL</label>
+                        @error('location')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <label for="job"
+                        class="col-md-4 col-form-label text-md-right">{{ __('Profession(if any)') }}</label>
 
-                    <input id="url" type="text" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
-                        name="url" value="{{ old('url') ?? $user->profile->url}}" autocomplete="url" autofocus>
+                    <div class="col-md-6">
+                        <input id="job" type="text" class="form-control @error('job') is-invalid @enderror" name="job"
+                            value="{{ old('job') }}" autocomplete="job">
 
-                    @if ($errors->has('url'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('url') }}</strong>
-                    </span>
-                    @endif
+                        @error('job')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Current Status') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="status" type="text" class="form-control @error('status') is-invalid @enderror"
+                            name="status" value="{{ old('status') }}" autocomplete="status">
+
+                        @error('status')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="row">
-                    <label for="image" class="col-md-4 col-form-label">Profile Image</label>
+                <div class="form-group row mt-4">
+                    <label for="url" class="col-md-4 col-form-label text-md-right">LinkedIn id</label>
+                    <div class="col-md-6">
+                        <input id="url" type="text" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
+                            name="url" value="{{ old('url') ?? $user->profile->url}}" autocomplete="url" autofocus>
 
-                    <input type="file" class="form-control-file" id="image" name="image">
-
-                    @if ($errors->has('image'))
-                    <strong>{{ $errors->first('image') }}</strong>
-                    @endif
+                        @if ($errors->has('url'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('url') }}</strong>
+                        </span>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="row pt-4">
+                <div class="row mt-4">
+                    <label for="image" class="col-md-4 col-form-label text-md-right">Profile Image</label>
+                    <div class="col-md-6">
+
+                        <input type="file" class="form-control-file" id="image" name="image">
+
+                        @if ($errors->has('image'))
+                        <strong>{{ $errors->first('image') }}</strong>
+                        @endif
+                    </div>
+                </div>
+                <div class="row mt-4 pt-4 offset-8">
                     <button class="btn btn-primary">Save Profile</button>
                 </div>
 
