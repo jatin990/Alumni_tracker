@@ -81,42 +81,79 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/main.js":
-/*!******************************!*\
-  !*** ./resources/js/main.js ***!
-  \******************************/
+/***/ "./resources/js/custom.js":
+/*!********************************!*\
+  !*** ./resources/js/custom.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).ready(function () {
+  load_data("");
 
+  function load_data() {
+    var full_text_search_query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+    // var _token = $("input[name=_token]").val();
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      // url: "{{ route('full-text-search.action') }}",
+      url: "/full-text-search/action",
+      method: "POST",
+      data: {
+        full_text_search_query: full_text_search_query // _token: _token
+
+      },
+      dataType: "json",
+      success: function success(data) {
+        var output = "";
+
+        if (data.length > 0) {
+          // output += "<?php> echo(" + $data + ")->links()</php>";
+          for (var count = 0; count < data.length; count++) {
+            output += "<php>";
+            output += "<td>" + "<a href=/search/" + data[count].id + ">" + data[count].name + "</a>" + "</td>";
+            output += "<td>" + data[count].year + "</td>";
+            output += "<td>" + data[count].college + "</td>";
+            output += "<td>" + data[count].branch + "</td>"; //   output += '<td>'+data[count].PostalCode+'</td>';
+            //   output += '<td>'+data[count].Country+'</td>';
+
+            output += "</php>";
+            output += "</tr>";
+          }
+        } else {
+          output += "<tr>";
+          output += '<td colspan="6">No Data Found</td>';
+          output += "</tr>";
+        }
+
+        $("tbody").html(output);
+      }
+    });
+  }
+
+  $("#search").click(function () {
+    var full_text_search_query = $("#full_text_search").val();
+    load_data(full_text_search_query);
+  });
+});
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!**************************************************************!*\
-  !*** multi ./resources/js/main.js ./resources/sass/app.scss ***!
-  \**************************************************************/
+/***/ 1:
+/*!**************************************!*\
+  !*** multi ./resources/js/custom.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Jatin\sih\resources\js\main.js */"./resources/js/main.js");
-module.exports = __webpack_require__(/*! C:\Users\Jatin\sih\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Jatin\sih\resources\js\custom.js */"./resources/js/custom.js");
 
 
 /***/ })

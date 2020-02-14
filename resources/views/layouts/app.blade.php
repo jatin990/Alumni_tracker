@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'alumni tracker') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/custom.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,7 +28,6 @@
         <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-
                     <img src="/storage/images/logo-white.png" alt="Alumn">
 
                 </a>
@@ -73,7 +73,9 @@
                                 href="{{route('admin_notices.show', ['c_admin'=>auth()->user()->id])}}">Notices</a></li>
                         <li class="nav-item"><a class="nav-link" href="#requests">Alumni requests</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Group Chat</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Alumni</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('full_text_search.index',['c_admin'=>auth()->user()->id])}}">Alumni</a>
+                        </li>
                         @endcan
                         @endauth
                         @endif
@@ -85,8 +87,9 @@
                         <li class="nav-item"><a class="nav-link"
                                 href="{{route('dir_notices.show', ['d_admin'=>auth()->user()->id])}}">Notices</a></li>
                         <li class="nav-item"><a class="nav-link" href="#requests">College staff requests</a></li>
-
-                        <li class="nav-item"><a class="nav-link" href="#">College admins</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{route('dir_full_text_search.index',['d_admin'=>auth()->user()->id])}}">Alumni</a>
+                        </li>
                         @endauth
                         @endif
 
@@ -101,30 +104,36 @@
                         </li>
                         @endif
                         @else
-                        @auth('web')
+                        {{-- @auth('web')
+                        @if(!Auth::guard('c_admin'))
                         <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}">
-                            <img src="{{  Auth::user()->profile->profileImage() }}" style='width: 40px;'
-                                class="rounded-circle ">
+                        <img src="{{  auth()->user()->profile->profileImage() }}" style='width: 40px;'
+                            class="rounded-circle ">
                         </a>
+                        @endif
                         @endauth
 
                         @auth('c_admin')
+                        @if(!Auth::guard('web'))
                         <a href="{{route('c_admin_profile.show', ['c_admin'=> auth()->user()->id])}}">
-                            <img src="{{  Auth::user()->c_admin_profile->profileImage() }}" style='width: 40px;'
+                            <img src="{{  auth()->user()->c_admin_profile->profileImage() }}" style='width: 40px;'
                                 class="rounded-circle">
                         </a>
+                        @endif
                         @endauth
 
                         @auth('d_admin')
+                        @if(!Auth::guard('web'))
                         <a href="{{route('d_admin_profile.show', ['d_admin'=> auth()->user()->id])}}">
-                            <img src="{{  Auth::user()->d_admin_profile->profileImage() }}" style='width: 40px;'
+                            <img src="{{  auth()->user()->d_admin_profile->profileImage() }}" style='width: 40px;'
                                 class="rounded-circle">
                         </a>
-                        @endauth
+                        @endif
+                        @endauth --}}
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ auth()->user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -150,5 +159,6 @@
         </main>
     </div>
 </body>
+@yield('script')
 
 </html>

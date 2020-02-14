@@ -5,15 +5,45 @@ html {
 
 blockquote {
     &:hover {
-        box-shadow: none !important;
+        box-shadow: 3px 3px 3px black !important;
     }
 }
 
+.container {
+    &.infinity {
+        background: rgba(0, 0, 0, 0.5), url(/storage/images/infinity.jpg) center no-repeat;
+        background-size: cover;
+        background-blend-mode: hard-light;
 
+    }
+
+    &.friends {
+        background: url(/storage/images/friends.jpg) center no-repeat;
+
+    }
+
+    &.hrt {
+        background: url(/storage/images/hrt.jpg) center no-repeat;
+
+    }
+
+
+    &.fimilia {
+        background: url(/storage/images/fimiia.jpg) center no-repeat;
+
+    }
+
+    &.map {
+        background: url(/storage/images/map.jpg) center no-repeat;
+
+    }
+
+}
 
 #intro {
     padding: 0;
     width: 100%;
+
     // background: #333;
 
     .border {

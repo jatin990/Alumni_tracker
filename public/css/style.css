@@ -4,7 +4,29 @@ html {
 }
 
 blockquote:hover {
-  box-shadow: none !important;
+  box-shadow: 3px 3px 3px black !important;
+}
+
+.container.infinity {
+  background: rgba(0, 0, 0, 0.5), url(/storage/images/infinity.jpg) center no-repeat;
+  background-size: cover;
+  background-blend-mode: hard-light;
+}
+
+.container.friends {
+  background: url(/storage/images/friends.jpg) center no-repeat;
+}
+
+.container.hrt {
+  background: url(/storage/images/hrt.jpg) center no-repeat;
+}
+
+.container.fimilia {
+  background: url(/storage/images/fimiia.jpg) center no-repeat;
+}
+
+.container.map {
+  background: url(/storage/images/map.jpg) center no-repeat;
 }
 
 #intro {

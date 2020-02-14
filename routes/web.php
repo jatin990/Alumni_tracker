@@ -93,3 +93,9 @@ Route::patch('c_admin_profile/{c_admin}/add_new_notice', 'NoticesController@addC
 
 Route::get('d_admin_profile/{d_admin}/notices', 'NoticesController@showDirectorateNotices')->name('dir_notices.show')->middleware('auth:d_admin'); //directorate notices
 Route::patch('d_admin_profile/{d_admin}/add_new_notice', 'NoticesController@addDirectorateNotice')->name('dir_notices.add')->middleware('auth:d_admin'); //directorate notices
+
+//search routes
+Route::get('c_admin_profile/{c_admin}/full-text-search', 'Full_text_search_Controller@index')->name('full_text_search.index')->middleware('auth:c_admin');
+Route::post('c_admin_profile/{c_admin}/full-text-search/action', 'Full_text_search_Controller@action')->name('full-text-search.action')->middleware('auth:c_admin');
+Route::get('d_admin_profile/{d_admin}/full-text-search', 'Full_text_search_Controller@dir_index')->name('dir_full_text_search.index')->middleware('auth:d_admin');
+Route::post('d_admin_profile/{d_admin}/full-text-search/action', 'Full_text_search_Controller@dir_action')->name('dir_full-text-search.action')->middleware('auth:d_admin');
