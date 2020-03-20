@@ -18,7 +18,7 @@
                 @endauth
                 @forelse ($events as $event)
                 <blockquote
-                    class="list-group-item h3 list-group-flush font-weight-bold text-left shadow p-4 mb-1 border-bottom-0 m-0 btn"
+                    class="list-group-item h3 list-group-flush font-weight-bold text-left p-4 mb-1 p-5 m-0 btn"
                     data-toggle="modal" data-target="#event_{{$event->id}}">
                     {{$event->title}}
                     <footer class="blockquote-footer text-right">

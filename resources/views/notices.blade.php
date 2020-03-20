@@ -18,7 +18,7 @@
                 @endauth
                 @forelse ($notices as $notice)
                 <blockquote
-                    class="list-group-item h3 list-group-flush font-weight-bold text-left shadow border-bottom-0 mb-1 p-4 btn">
+                    class="list-group-item h3 list-group-flush font-weight-bold text-left p-5 mb-1 btn">
                     {{$notice->title}}
                     <footer class="blockquote-footer text-right">
                         <cite>

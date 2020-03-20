@@ -95,7 +95,7 @@
                             class="col-md-4 col-form-label text-md-right">{{ __('Contact no') }}</label>
 
                         <div class="col-md-6">
-                            <input id="phone_no" type="text"
+                            <input id="phone_no" type="tel"
                                 class="form-control @error('phone_no') is-invalid @enderror" name="phone_no"
                                 value="{{ old('phone_no') }}" required autocomplete="phone_no">
 

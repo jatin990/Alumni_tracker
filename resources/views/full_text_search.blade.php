@@ -3,7 +3,7 @@
 
 <div class="container">
     <br />
-    <h3 align="center">Full Text Search in Laravel 6 using Ajax</h3>
+    <h3 align="center">Search for alumni</h3>
     <br />
     <div class="row">
         <div class="col-md-10">

@@ -20,6 +20,7 @@ class VerificationController extends Controller
     public function verifyProfile(\App\C_admin $c_admin,\App\User $user)
     {
          $this->authorize('update', $c_admin->c_admin_profile);
+        // Mail::to($c_admin->email)->send(new VerificationMail());
        $user->profile->update(['verified'=>1]);
        return redirect()->route('c_admin_profile.show',['c_admin'=>$c_admin]);
     }

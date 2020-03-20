@@ -131,6 +131,8 @@
                         @endif
                         @endauth --}}
                         <li class="nav-item dropdown">
+                        {{-- <a href="{{route('profile.show', ['user'=> auth()->user()->id])}}"> --}}
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ auth()->user()->name }} <span class="caret"></span>

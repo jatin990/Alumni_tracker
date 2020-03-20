@@ -27,6 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'college' => 'college 1',
         'branch'=>'cse'
-        'year' => 2015,
+        // 'year' => 2015,
     ];
 });
